@@ -26,7 +26,7 @@ namespace Ping
             try
             {
                 if (string.IsNullOrEmpty(Host)) return false;
-
+                Console.WriteLine("Ping:{0}", Host);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Host);
                 request.Timeout = Timeout == 0 ? 3000 : Timeout;
                 request.AllowAutoRedirect = false;
@@ -38,7 +38,7 @@ namespace Ping
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
