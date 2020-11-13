@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Ping
+    - name: Run
       env:
-        host:${{secrets.HOST}}
+        host: ${{secrets.HOST}}
       run: dotnet Ping/bin/Release/net5.0/Ping.dll --host ${host}
