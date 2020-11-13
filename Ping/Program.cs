@@ -1,0 +1,48 @@
+﻿using McMaster.Extensions.CommandLineUtils;
+using System;
+using System.Net;
+
+namespace Ping
+{
+    //dotnet pack -o ./
+    [Command(Description = "Determine whether a remote web server is accessible over the network.")]
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CommandLineApplication.Execute<Program>(args);
+        }
+
+        [Option(Description = "Host name with schema, http://www.zkea.net")]
+        public string Host { get; set; }
+        [Option(Description = "Timeout")]
+        public int Timeout { get; set; }
+        private int OnExecute()
+        {
+            return Ping() ? 0 : 1;
+        }
+        private bool Ping()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Host)) return false;
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Host);
+                request.Timeout = Timeout == 0 ? 3000 : Timeout;
+                request.AllowAutoRedirect = false;
+                request.Method = "HEAD";
+
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    Console.WriteLine(response.StatusCode);
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+    }
+}
