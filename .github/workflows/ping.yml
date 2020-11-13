@@ -23,9 +23,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Run
-      with: 
-        status: ${{job.status}}
-        notify_when: 'failure'
       env:
         host: ${{secrets.HOST}}
       run: dotnet Ping/bin/Release/net5.0/Ping.dll --host ${host}
