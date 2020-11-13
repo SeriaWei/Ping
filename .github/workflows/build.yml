@@ -1,10 +1,10 @@
-name: Ping Web Site
+name: Auto Build
 
 on:
   push:
     branches: [ master ]
-  schedule: 
-    - cron: '*/10 * * * *' #every 10 minutes
+  pull_request:
+    branches: [ master ]
 jobs:
   ping:
 
@@ -17,8 +17,10 @@ jobs:
       with:
         dotnet-version: 5.0.100
     - name: Install dependencies
-      run: dotnet tool restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
     - name: Run
       env:
         host: ${{secrets.HOST}}
-      run: dotnet tool run Web.Ping --host ${host}
+      run: dotnet Ping/bin/Release/net5.0/Ping.dll --host ${host}
