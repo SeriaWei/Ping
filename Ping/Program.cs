@@ -8,9 +8,9 @@ namespace Ping
     [Command(Description = "Determine whether a remote web server is accessible over the network.")]
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            CommandLineApplication.Execute<Program>(args);
+            return CommandLineApplication.Execute<Program>(args);
         }
 
         [Option(Description = "Host name with schema, http://www.zkea.net")]
