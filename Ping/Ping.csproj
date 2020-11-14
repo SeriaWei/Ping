@@ -17,7 +17,7 @@
     <Copyright>ZKEASOFT</Copyright>
     <PackageProjectUrl>https://www.zkea.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeriaWei/Ping</RepositoryUrl>
-    <PackageTags>ZKEACMS</PackageTags>
+    <PackageTags>ZKEASOFT,Ping</PackageTags>
     <NeutralLanguage>zh-Hans</NeutralLanguage>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicense>https://github.com/SeriaWei/Ping/blob/master/LICENSE</PackageLicense>
