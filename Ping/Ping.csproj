@@ -7,13 +7,13 @@
     <ToolCommandName>Web.Ping</ToolCommandName>
 
     <PackageId>Web.Ping</PackageId>
-    <PackageVersion>0.0.1</PackageVersion>
+    <PackageVersion>0.0.2</PackageVersion>
     <Authors>ZKEASOFT</Authors>
     <Description>Determine whether a remote web server is accessible over the network.</Description>
 
     <PackAsTool>True</PackAsTool>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Copyright>ZKEASOFT</Copyright>
     <PackageProjectUrl>https://www.zkea.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeriaWei/Ping</RepositoryUrl>

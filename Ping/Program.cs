@@ -1,5 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using System;
+using System.Diagnostics;
 using System.Net;
 
 namespace Ping
@@ -23,9 +24,11 @@ namespace Ping
         }
         private bool Ping()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             try
             {
                 if (string.IsNullOrEmpty(Host)) return false;
+
                 Console.WriteLine("Ping:{0}", Host);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Host);
                 request.Timeout = Timeout == 0 ? 3000 : Timeout;
@@ -42,6 +45,10 @@ namespace Ping
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+            finally
+            {
+                Console.WriteLine("Elapsed: {0}", stopwatch.Elapsed);
             }
         }
     }
