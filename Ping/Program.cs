@@ -31,7 +31,7 @@ namespace Ping
 
                 Console.WriteLine("Ping:{0}", Host);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Host);
-                request.Timeout = Timeout == 0 ? 3000 : Timeout;
+                request.Timeout = Timeout == 0 ? 10000 : Timeout;
                 request.AllowAutoRedirect = false;
                 request.Method = "HEAD";
 
