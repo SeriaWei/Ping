@@ -2,6 +2,8 @@
 using System;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Ping
 {
@@ -9,20 +11,22 @@ namespace Ping
     [Command(Description = "Determine whether a remote web server is accessible over the network.")]
     class Program
     {
-        static int Main(string[] args)
+        const string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3438.3 Safari/537.36";
+        static Task<int> Main(string[] args)
         {
-            return CommandLineApplication.Execute<Program>(args);
+            return CommandLineApplication.ExecuteAsync<Program>(args);
         }
 
         [Option(Description = "Host name with schema, http://www.zkea.net")]
         public string Host { get; set; }
-        [Option(Description = "Timeout")]
+        [Option(Description = "Timeout seconds.")]
         public int Timeout { get; set; }
-        private int OnExecute()
+        private async Task<int> OnExecuteAsync()
         {
-            return Ping() ? 0 : 1;
+            bool success = await PingAsync();
+            return success ? 0 : 1;
         }
-        private bool Ping()
+        private async Task<bool> PingAsync()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             try
@@ -30,16 +34,12 @@ namespace Ping
                 if (string.IsNullOrEmpty(Host)) return false;
 
                 Console.WriteLine("Ping:{0}", Host);
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Host);
-                request.Timeout = Timeout == 0 ? 10000 : Timeout;
-                request.AllowAutoRedirect = false;
-                request.Method = "HEAD";
-
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                {
-                    Console.WriteLine(response.StatusCode);
-                    return true;
-                }
+                using HttpClient httpClient = new HttpClient();
+                var requestMessage = new HttpRequestMessage(HttpMethod.Head, Host);
+                httpClient.Timeout = new TimeSpan(0, 0, Timeout == 0 ? 10 : Timeout);
+                var responseMessage = await httpClient.SendAsync(requestMessage);
+                Console.WriteLine(responseMessage.StatusCode);
+                return responseMessage.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
