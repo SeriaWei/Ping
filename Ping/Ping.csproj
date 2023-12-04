@@ -1,33 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 
-    <ToolCommandName>Web.Ping</ToolCommandName>
+		<ToolCommandName>Web.Ping</ToolCommandName>
 
-    <PackageId>Web.Ping</PackageId>
-    <PackageVersion>0.0.4</PackageVersion>
-    <Authors>ZKEASOFT</Authors>
-    <Description>Determine whether a remote web server is accessible over the network.</Description>
+		<PackageId>Web.Ping</PackageId>
+		<PackageVersion>1.0</PackageVersion>
+		<Authors>ZKEASOFT</Authors>
+		<Description>Determine whether a remote web server is accessible over the network.</Description>
 
-    <PackAsTool>True</PackAsTool>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.0.4</Version>
-    <Copyright>ZKEASOFT</Copyright>
-    <PackageProjectUrl>https://www.zkea.net</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/SeriaWei/Ping</RepositoryUrl>
-    <PackageTags>ZKEASOFT,Ping</PackageTags>
-    <NeutralLanguage>zh-Hans</NeutralLanguage>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-  </PropertyGroup>
+		<PackAsTool>True</PackAsTool>
+		<!--<GeneratePackageOnBuild>True</GeneratePackageOnBuild>-->
+		<Version>1.0</Version>
+		<Copyright>ZKEASOFT</Copyright>
+		<PackageProjectUrl>https://www.zkea.net</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/SeriaWei/Ping</RepositoryUrl>
+		<PackageTags>ZKEASOFT,Ping</PackageTags>
+		<NeutralLanguage>zh-Hans</NeutralLanguage>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="Images\icon.png" Pack="true" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="Images\icon.png" Pack="true" PackagePath="/" />
+		<None Include="../README.md" Pack="true" PackagePath="/" />
+	</ItemGroup>
 </Project>
